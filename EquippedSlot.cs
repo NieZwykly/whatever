@@ -36,6 +36,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
     public string ItemName => itemName; // Property to get the item name
     public Sprite ItemSprite => itemSprite; // Property to get the item sprite
     public string ItemDescription => itemDescription; // Property to get the item description
+    public Image itemImage => itemImage;
 
     // OTHER VARIABLES//
     private bool isEquipped; // Flag to track if the item is equipped
@@ -94,7 +95,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
         equipButton.gameObject.SetActive(false);
         unEquipButton.gameObject.SetActive(true); // Always show delete button for now
         useButton.gameObject.SetActive(false);
-        deleteButton.gameObject.SetActive(false); 
+        deleteButton.gameObject.SetActive(false);
     }
 
     public void DeselectItem()
@@ -236,6 +237,18 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
             newPos.y = screenHeight - 550;
 
         panelRect.position = newPos; // Apply the new position to the panel
+    }
+
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, EquipmentSlotType newSlotType)
+    { 
+        // If the item does not exist in this slot, update the slot with the new item
+        this.itemName = itemName;
+        this.itemSprite = itemSprite;
+        itemImage.sprite = itemSprite;
+        this.itemDescription = itemDescription;
+        this.slotType = newSlotType;
+
+        return 0;  // No excess items
     }
 }
 
